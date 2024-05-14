@@ -1,0 +1,6 @@
+    /* 1º jquery */
+    <script src="js/jquery.min.js"></script>
+    /* 2º jquery mask */
+    <script src="js/jquery.mask.min.js"></script>
+    /* 3º jquery modelo */
+    <script src="js/mask.js"></script>
