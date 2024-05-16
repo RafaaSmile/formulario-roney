@@ -18,4 +18,8 @@ $sql = "INSERT INTO
     VALUES 
     (NULL, '{$nome}', '{$sobrenome}', '{$cpf}', '{$dt_nascimento}', '{$email}', '{$telefone}', '{$endereco}', '{$estcivil}', '{$nacionalidade}', '{$sexo}";
 
-$conexao->query($sql);
+if($conexao->query($sql) === True) {
+    header('Location: formulario.html');
+} else {
+    echo "<h3>Error: " .$conexao->error ."</h3>;
+}
