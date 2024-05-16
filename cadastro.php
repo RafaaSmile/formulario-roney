@@ -1,6 +1,5 @@
 <?php
-
-//localhost
+// localhost
 
 $nome = $_GET['nome'];
 $sobrenome = $_GET['sobrenome'];
@@ -13,13 +12,21 @@ $estcivil = $_GET['est-civil'];
 $nacionalidade = $_GET['nacionalidade'];
 $sexo = $_GET['sexo'];
 
-$sql = "INSERT INTO 
-    usuarios (id, nome, cpf, dt_nascimento, email, telefone, endereco, est_civil, nacionalidade, sexo)
-    VALUES 
-    (NULL, '{$nome}', '{$sobrenome}', '{$cpf}', '{$dt_nascimento}', '{$email}', '{$telefone}', '{$endereco}', '{$estcivil}', '{$nacionalidade}', '{$sexo}";
+// Consulta para verificar se o email já existe
+$query = "SELECT * FROM usuarios WHERE email = '$email'";
+$result = $conexao->query($query);
 
-if($conexao->query($sql) === True) {
-    header('Location: formulario.html');
+if ($result->num_rows > 0) {
+    echo "<h3>Cadastro existente.</h3>";
 } else {
-    echo "<h3>Error: " .$conexao->error ."</h3>;
+    // Email não existe, faça a inserção
+    $sql = "INSERT INTO usuarios (nome, sobrenome, cpf, dt_nascimento, email, telefone, endereco, est_civil, nacionalidade, sexo)
+            VALUES ('$nome', '$sobrenome', '$cpf', '$dt_nascimento', '$email', '$telefone', '$endereco', '$estcivil', '$nacionalidade', '$sexo')";
+
+    if ($conexao->query($sql) === true) {
+        header('Location: formulario.html');
+    } else {
+        echo "<h3>Error: " . $conexao->error . "</h3>";
+    }
 }
+?>
