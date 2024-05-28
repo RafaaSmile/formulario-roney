@@ -21,7 +21,11 @@ $resultado = $conexao->query($sql);
                 <td><?php echo $linha['id']; ?></td>
                 <td><?php echo $linha['nome']; ?></td>
                 <td><?php echo $linha['cpf']; ?></td>
-                <td>Excluir |   Editar |    Visualizar</td>
+                <td>
+                <?php    
+                echo "<a href='listarcadastro.php?operacao=excluir&id=$linha[id]'>Excluir</a> |   Editar |    Visualizar"
+                ?>
+                </td>
             </tr>
         <?php } ?>
     </tbody>
